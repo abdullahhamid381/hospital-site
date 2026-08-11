@@ -31,7 +31,19 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
                 href="/admin/about"
                 className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-secondary hover:text-text"
               >
-                About Section
+                About Page
+              </Link>
+              <Link
+                href="/admin/services"
+                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-secondary hover:text-text"
+              >
+                Services
+              </Link>
+              <Link
+                href="/admin/staff"
+                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-secondary hover:text-text"
+              >
+                Staff
               </Link>
               <Link
                 href="/admin/admins"

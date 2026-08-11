@@ -3,19 +3,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DOCTORS } from "@/lib/data/doctors";
-import { SERVICES } from "@/lib/data/services";
 import { DEPARTMENTS } from "@/lib/data/departments";
 import { BLOG_POSTS } from "@/lib/data/blog";
 import { FACILITIES } from "@/lib/data/facilities";
 
 type Result = { label: string; category: string; href: string };
 
-function buildIndex(): Result[] {
+function buildStaticIndex(): Result[] {
   return [
     ...DOCTORS.map((d) => ({ label: d.name, category: "Doctors", href: `/doctors/${d.slug}` })),
-    ...SERVICES.map((s) => ({ label: s.name, category: "Services", href: `/services/${s.slug}` })),
     ...DEPARTMENTS.map((d) => ({ label: d.name, category: "Departments", href: `/departments/${d.slug}` })),
     ...BLOG_POSTS.map((b) => ({ label: b.title, category: "Blog", href: `/blog/${b.slug}` })),
     ...FACILITIES.map((f) => ({ label: f.name, category: "Facilities", href: `/facilities/${f.slug}` })),
@@ -24,7 +22,28 @@ function buildIndex(): Result[] {
 
 export function SearchModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [query, setQuery] = useState("");
-  const index = useMemo(() => buildIndex(), []);
+  const [services, setServices] = useState<Result[]>([]);
+  const [staff, setStaff] = useState<Result[]>([]);
+  const staticIndex = useMemo(() => buildStaticIndex(), []);
+  const index = useMemo(() => [...staticIndex, ...services, ...staff], [staticIndex, services, staff]);
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data) => {
+        const list = (data.services ?? []) as { slug: string; name: string }[];
+        setServices(list.map((s) => ({ label: s.name, category: "Services", href: `/services/${s.slug}` })));
+      })
+      .catch(() => {});
+
+    fetch("/api/staff")
+      .then((res) => res.json())
+      .then((data) => {
+        const list = (data.staff ?? []) as { slug: string; name: string }[];
+        setStaff(list.map((s) => ({ label: s.name, category: "Staff", href: `/staff/${s.slug}` })));
+      })
+      .catch(() => {});
+  }, []);
 
   const results = useMemo(() => {
     if (!query.trim()) return [];

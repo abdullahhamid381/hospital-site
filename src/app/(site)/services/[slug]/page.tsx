@@ -6,31 +6,30 @@ import { Container, Badge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/lib/icon-map";
-import { unsplash } from "@/lib/unsplash";
-import { SERVICES, getServiceBySlug } from "@/lib/data/services";
+import { resolveImageSrc, isUnsplashSrc } from "@/lib/image-src";
+import { getServices, getServiceBySlug } from "@/lib/services";
 import { DOCTORS } from "@/lib/data/doctors";
 import { DoctorCard } from "@/components/cards/doctor-card";
 import { FAQSection } from "@/components/sections/faq-section";
 import { ServiceCard } from "@/components/cards/service-card";
 
-export function generateStaticParams() {
-  return SERVICES.map((s) => ({ slug: s.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const service = await getServiceBySlug(slug);
   if (!service) return {};
   return { title: service.name, description: service.short };
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const service = await getServiceBySlug(slug);
   if (!service) notFound();
 
-  const related = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const related = (await getServices()).filter((s) => s.isVisible && s.slug !== service.slug).slice(0, 3);
   const doctors = DOCTORS.slice(0, 3);
+  const imageSrc = resolveImageSrc(service.image, 900);
 
   return (
     <>
@@ -45,8 +44,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <p className="mt-4 text-base leading-relaxed text-text-muted">{service.description}</p>
             <Button href="/appointment" size="lg" className="mt-8">Book This Service</Button>
           </Reveal>
-          <Reveal delay={0.1} className="relative aspect-[4/3] overflow-hidden rounded-[28px] border border-border">
-            <Image src={unsplash(service.image, 900)} alt={service.name} fill className="object-cover" />
+          <Reveal delay={0.1} className="relative aspect-4/3 overflow-hidden rounded-[28px] border border-border">
+            <Image src={imageSrc} alt={service.name} fill unoptimized={!isUnsplashSrc(imageSrc)} className="object-cover" />
           </Reveal>
         </Container>
       </section>

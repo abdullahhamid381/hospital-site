@@ -1,35 +1,36 @@
 import { cache } from "react";
-import { pool } from "@/lib/db";
-import { ABOUT_DEFAULT, type AboutContent, type AboutFeature } from "@/lib/data/about";
+import { pool, ensureAboutSectionsTable } from "@/lib/db";
+import { DEFAULT_ABOUT_SECTIONS, type AboutSection, type AboutSectionType } from "@/lib/data/about-sections";
 
-type AboutRow = {
-  badge: string;
-  heading: string;
-  paragraph1: string;
-  paragraph2: string;
-  image_id: string;
-  features: AboutFeature[];
-  hero_eyebrow: string;
-  hero_title: string;
-  hero_description: string;
+type AboutSectionRow = {
+  id: number;
+  type: AboutSectionType;
+  title: string;
+  sort_order: number;
+  is_visible: boolean;
+  show_on_home: boolean;
+  content: AboutSection["content"];
+  created_at: string;
+  updated_at: string;
 };
 
-function mapRow(r: AboutRow): AboutContent {
+function mapRow(r: AboutSectionRow): AboutSection {
   return {
-    badge: r.badge,
-    heading: r.heading,
-    paragraph1: r.paragraph1,
-    paragraph2: r.paragraph2,
-    imageId: r.image_id,
-    features: r.features,
-    heroEyebrow: r.hero_eyebrow,
-    heroTitle: r.hero_title,
-    heroDescription: r.hero_description,
+    id: r.id,
+    type: r.type,
+    title: r.title,
+    sortOrder: r.sort_order,
+    isVisible: r.is_visible,
+    showOnHome: r.show_on_home,
+    content: r.content,
+    createdAt: r.created_at,
+    updatedAt: r.updated_at,
   };
 }
 
-export const getAboutContent = cache(async (): Promise<AboutContent> => {
-  const { rows } = await pool.query<AboutRow>("SELECT * FROM about_content WHERE id = 1");
-  if (rows.length === 0) return ABOUT_DEFAULT;
-  return mapRow(rows[0]);
+export const getAboutSections = cache(async (): Promise<AboutSection[]> => {
+  await ensureAboutSectionsTable();
+  const { rows } = await pool.query<AboutSectionRow>("SELECT * FROM about_sections ORDER BY sort_order ASC, id ASC");
+  if (rows.length === 0) return DEFAULT_ABOUT_SECTIONS;
+  return rows.map(mapRow);
 });

@@ -2,10 +2,12 @@ import { Container, SectionHeading } from "@/components/ui/primitives";
 import { Reveal, StaggerGroup } from "@/components/ui/reveal";
 import { ServiceCard } from "@/components/cards/service-card";
 import { Button } from "@/components/ui/button";
-import { SERVICES } from "@/lib/data/services";
+import { getServices } from "@/lib/services";
 import { ArrowRight } from "lucide-react";
 
-export function ServicesSection({ limit = 8 }: { limit?: number }) {
+export async function ServicesSection({ limit = 8 }: { limit?: number }) {
+  const services = (await getServices()).filter((s) => s.isVisible);
+
   return (
     <section className="py-24 md:py-32">
       <Container>
@@ -21,7 +23,7 @@ export function ServicesSection({ limit = 8 }: { limit?: number }) {
         </div>
 
         <StaggerGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.slice(0, limit).map((s) => (
+          {services.slice(0, limit).map((s) => (
             <Reveal key={s.slug}>
               <ServiceCard service={s} />
             </Reveal>

@@ -5,6 +5,7 @@ import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { ServicesSection } from "@/components/sections/services-section";
 import { DepartmentsSection } from "@/components/sections/departments-section";
 import { DoctorsSection } from "@/components/sections/doctors-section";
+import { StaffSection } from "@/components/sections/staff-section";
 import { AppointmentSection } from "@/components/sections/appointment-section";
 import { Emergency } from "@/components/sections/emergency";
 import { FacilitiesSection } from "@/components/sections/facilities-section";
@@ -19,6 +20,8 @@ import { BlogSection } from "@/components/sections/blog-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { FinalCTA } from "@/components/sections/final-cta";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>
@@ -29,6 +32,7 @@ export default function Home() {
       <ServicesSection />
       <DepartmentsSection />
       <DoctorsSection />
+      <StaffSection />
       <AppointmentSection />
       <Emergency />
       <FacilitiesSection />

@@ -1,23 +1,11 @@
-export type ServiceProcessStep = { title: string; detail: string };
+const { Pool } = require("pg");
 
-export type Service = {
-  id: number;
-  slug: string;
-  name: string;
-  icon: string;
-  short: string;
-  description: string;
-  benefits: string[];
-  process: ServiceProcessStep[];
-  image: string;
-  sortOrder: number;
-  isVisible: boolean;
-  createdAt: string | null;
-  updatedAt: string | null;
-};
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
 
-/** In-memory fallback/seed source, used when the `services` table is empty. */
-export const DEFAULT_SERVICES: Service[] = [
+const DEFAULT_SERVICES = [
   {
     slug: "emergency-care",
     name: "Emergency Care",
@@ -274,11 +262,48 @@ export const DEFAULT_SERVICES: Service[] = [
     ],
     image: "photo-1666214280391-8ff5bd3c0bf0",
   },
-].map((s, i) => ({
-  ...s,
-  id: i + 1,
-  sortOrder: i,
-  isVisible: true,
-  createdAt: null,
-  updatedAt: null,
-}));
+];
+
+async function main() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS services (
+      id SERIAL PRIMARY KEY,
+      slug TEXT NOT NULL UNIQUE,
+      name TEXT NOT NULL,
+      icon TEXT NOT NULL,
+      short TEXT NOT NULL,
+      description TEXT NOT NULL,
+      benefits JSONB NOT NULL,
+      process JSONB NOT NULL,
+      image TEXT NOT NULL,
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      is_visible BOOLEAN NOT NULL DEFAULT true,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+  `);
+  await pool.query(`CREATE INDEX IF NOT EXISTS services_sort_idx ON services (sort_order);`);
+
+  const { rows } = await pool.query("SELECT COUNT(*)::int AS n FROM services");
+  if (rows[0].n > 0) {
+    console.log("services already seeded, skipping.");
+    await pool.end();
+    return;
+  }
+
+  for (let i = 0; i < DEFAULT_SERVICES.length; i++) {
+    const s = DEFAULT_SERVICES[i];
+    await pool.query(
+      `INSERT INTO services (slug, name, icon, short, description, benefits, process, image, sort_order, is_visible)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, true)`,
+      [s.slug, s.name, s.icon, s.short, s.description, JSON.stringify(s.benefits), JSON.stringify(s.process), s.image, i]
+    );
+  }
+  console.log(`Seeded services with ${DEFAULT_SERVICES.length} default services.`);
+  await pool.end();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
