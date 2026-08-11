@@ -1,4 +1,4 @@
-import { Phone, Siren, CalendarCheck } from "lucide-react";
+import { Phone, Siren, Mail } from "lucide-react";
 import { SITE } from "@/lib/data/site";
 import Link from "next/link";
 
@@ -17,9 +17,9 @@ export function AnnouncementBar() {
             <Phone className="h-3.5 w-3.5" />
             {SITE.emergencyPhone}
           </a>
-          <Link href="/appointment" className="flex items-center gap-1.5 text-white/80 hover:text-primary transition-colors">
-            <CalendarCheck className="h-3.5 w-3.5" />
-            Book Appointment
+          <Link href="/contact" className="flex items-center gap-1.5 text-white/80 hover:text-primary transition-colors">
+            <Mail className="h-3.5 w-3.5" />
+            Contact Us
           </Link>
         </div>
       </div>

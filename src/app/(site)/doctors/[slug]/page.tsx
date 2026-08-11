@@ -50,7 +50,7 @@ export default async function DoctorProfilePage({ params }: { params: Promise<{ 
                   <span className="text-text-muted">{doctor.languages.join(", ")}</span>
                 </div>
               </div>
-              <Button href="#book" className="mt-6 w-full">Book Appointment</Button>
+              <Button href="#book" className="mt-6 w-full">Contact Us</Button>
             </div>
           </Reveal>
 
@@ -103,7 +103,7 @@ export default async function DoctorProfilePage({ params }: { params: Promise<{ 
       <section id="book" className="bg-bg-secondary py-24 md:py-32 scroll-mt-24">
         <Container>
           <Reveal>
-            <h2 className="section-headline text-balance font-bold text-text">Book with {doctor.name}</h2>
+            <h2 className="section-headline text-balance font-bold text-text">Contact {doctor.name}</h2>
           </Reveal>
           <Reveal delay={0.1} className="mt-12">
             <AppointmentForm />

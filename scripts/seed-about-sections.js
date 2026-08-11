@@ -95,10 +95,10 @@ const DEFAULT_SECTIONS = [
     showOnHome: false,
     content: {
       heading: "Your Health Deserves Exceptional Care.",
-      primaryLabel: "Book an Appointment",
-      primaryHref: "/appointment",
-      secondaryLabel: "Contact Us",
-      secondaryHref: "/contact",
+      primaryLabel: "Contact Us",
+      primaryHref: "/contact",
+      secondaryLabel: "View Services",
+      secondaryHref: "/services",
     },
   },
 ];

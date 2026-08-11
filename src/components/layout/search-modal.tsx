@@ -40,7 +40,7 @@ export function SearchModal({ open, onClose }: { open: boolean; onClose: () => v
       .then((res) => res.json())
       .then((data) => {
         const list = (data.staff ?? []) as { slug: string; name: string }[];
-        setStaff(list.map((s) => ({ label: s.name, category: "Staff", href: `/staff/${s.slug}` })));
+        setStaff(list.map((s) => ({ label: s.name, category: "Faculty", href: `/staff/${s.slug}` })));
       })
       .catch(() => {});
   }, []);

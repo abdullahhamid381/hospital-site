@@ -414,7 +414,7 @@ function StaffForm({ form, onChange, slugEditable }: { form: FormState; onChange
           <div className="flex flex-wrap gap-6">
             <label className="flex items-center gap-2 text-sm text-text">
               <input type="checkbox" checked={form.appointmentEnabled} onChange={(e) => onChange({ ...form, appointmentEnabled: e.target.checked })} />
-              Show &ldquo;Book Appointment&rdquo; on this profile
+              Show the appointment contact form on this profile
             </label>
             <label className="flex items-center gap-2 text-sm text-text">
               <input type="checkbox" checked={form.featured} onChange={(e) => onChange({ ...form, featured: e.target.checked })} />
@@ -544,9 +544,9 @@ export default function StaffAdminPage() {
   return (
     <div>
       <div>
-        <h1 className="font-display text-2xl font-bold text-text">Staff & Faculty</h1>
+        <h1 className="font-display text-2xl font-bold text-text">Our Faculty</h1>
         <p className="mt-1 text-sm text-text-muted">
-          Powers the /staff directory and the homepage staff teaser. Separate from the Doctors directory.
+          Powers the /staff directory page. Not shown on the homepage, and separate from the Doctors directory.
         </p>
       </div>
 

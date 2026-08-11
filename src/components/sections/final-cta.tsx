@@ -1,4 +1,4 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -18,10 +18,7 @@ export function FinalCTA() {
           </h2>
         </Reveal>
         <Reveal delay={0.1} className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button href="/appointment" size="lg" icon={<ArrowRight className="h-4 w-4" />}>
-            Book an Appointment
-          </Button>
-          <Button href="/contact" variant="outline" size="lg" className="border-white/20 text-white hover:border-primary hover:text-primary" icon={<Phone className="h-4 w-4" />}>
+          <Button href="/contact" size="lg" icon={<Phone className="h-4 w-4" />}>
             Contact Us
           </Button>
         </Reveal>

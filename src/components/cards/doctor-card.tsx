@@ -25,8 +25,8 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
           <Button href={`/doctors/${doctor.slug}`} variant="outline" size="sm" className="flex-1">
             View Profile
           </Button>
-          <Button href="/appointment" size="sm" className="flex-1">
-            Book
+          <Button href="/contact" size="sm" className="flex-1">
+            Contact
           </Button>
         </div>
       </div>

@@ -46,8 +46,8 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
         <Container className="max-w-3xl">
           <Reveal>
             <p className="text-base leading-relaxed text-text-muted">{facility.description}</p>
-            <Button href="/appointment" size="lg" className="mt-8" icon={<ArrowRight className="h-4 w-4" />}>
-              Book an Appointment
+            <Button href="/contact" size="lg" className="mt-8" icon={<ArrowRight className="h-4 w-4" />}>
+              Contact Us
             </Button>
           </Reveal>
         </Container>

@@ -66,8 +66,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             <a href={`tel:${SITE.emergencyPhone.replace(/\s/g, "")}`} className="flex items-center justify-center gap-2 text-sm text-text-muted">
               <Phone className="h-4 w-4 text-primary" /> {SITE.emergencyPhone}
             </a>
-            <Button href="/appointment" className="w-full">
-              Book an Appointment
+            <Button href="/contact" className="w-full">
+              Contact Us
             </Button>
           </div>
         </motion.div>

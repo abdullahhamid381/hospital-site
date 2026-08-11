@@ -90,7 +90,7 @@ export default async function DepartmentDetailPage({ params }: { params: Promise
                 </div>
               </div>
             </div>
-            <Button href="/appointment" size="lg" className="w-full">Book Appointment</Button>
+            <Button href="/contact" size="lg" className="w-full">Contact Us</Button>
           </Reveal>
         </Container>
       </section>
@@ -115,8 +115,8 @@ export default async function DepartmentDetailPage({ params }: { params: Promise
       <section className="bg-black py-20">
         <Container className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
           <h2 className="font-display text-2xl font-bold text-white">Need care from {dept.name}?</h2>
-          <Button href="/appointment" size="lg" icon={<ArrowRight className="h-4 w-4" />}>
-            Book an Appointment
+          <Button href="/contact" size="lg" icon={<ArrowRight className="h-4 w-4" />}>
+            Contact Us
           </Button>
         </Container>
       </section>

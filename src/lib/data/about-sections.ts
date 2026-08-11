@@ -154,10 +154,10 @@ export function defaultContentForType(type: AboutSectionType): AboutSectionConte
     case "cta":
       return {
         heading: "New Call to Action",
-        primaryLabel: "Book an Appointment",
-        primaryHref: "/appointment",
-        secondaryLabel: "Contact Us",
-        secondaryHref: "/contact",
+        primaryLabel: "Contact Us",
+        primaryHref: "/contact",
+        secondaryLabel: "View Services",
+        secondaryHref: "/services",
       };
   }
 }
@@ -277,10 +277,10 @@ export const DEFAULT_ABOUT_SECTIONS: AboutSection[] = [
     updatedAt: null,
     content: {
       heading: "Your Health Deserves Exceptional Care.",
-      primaryLabel: "Book an Appointment",
-      primaryHref: "/appointment",
-      secondaryLabel: "Contact Us",
-      secondaryHref: "/contact",
+      primaryLabel: "Contact Us",
+      primaryHref: "/contact",
+      secondaryLabel: "View Services",
+      secondaryHref: "/services",
     } satisfies CTAContent,
   },
 ];

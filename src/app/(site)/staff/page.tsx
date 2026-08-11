@@ -10,7 +10,7 @@ import { SITE } from "@/lib/data/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Staff & Faculty",
+  title: "Our Faculty",
   description: `Meet the leadership, nursing, academic faculty, and support staff behind ${SITE.name}.`,
 };
 
@@ -21,7 +21,7 @@ export default async function StaffPage() {
   const categoryCount = new Set(staff.map((s) => s.category)).size;
 
   const stats = [
-    { value: staff.length, suffix: "+", label: "Staff & Faculty" },
+    { value: staff.length, suffix: "+", label: "Faculty & Staff" },
     { value: departmentCount, suffix: "", label: "Departments Represented" },
     { value: categoryCount, suffix: "", label: "Staff Categories" },
   ];
@@ -29,8 +29,8 @@ export default async function StaffPage() {
   return (
     <>
       <PageHero
-        eyebrow="Our Team"
-        title="Meet Our Staff & Faculty"
+        eyebrow="Our Faculty"
+        title="Our Faculty"
         description="Leadership, nursing and clinical support, academic faculty, and the wider team dedicated to running the hospital every day."
       />
 

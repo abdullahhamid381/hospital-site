@@ -42,7 +42,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <Badge className="mt-6">Service</Badge>
             <h1 className="section-headline text-balance mt-4 font-bold text-text">{service.name}</h1>
             <p className="mt-4 text-base leading-relaxed text-text-muted">{service.description}</p>
-            <Button href="/appointment" size="lg" className="mt-8">Book This Service</Button>
+            <Button href="/contact" size="lg" className="mt-8">Contact Us</Button>
           </Reveal>
           <Reveal delay={0.1} className="relative aspect-4/3 overflow-hidden rounded-[28px] border border-border">
             <Image src={imageSrc} alt={service.name} fill unoptimized={!isUnsplashSrc(imageSrc)} className="object-cover" />
@@ -117,8 +117,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <section className="bg-black py-20">
         <Container className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
           <h2 className="font-display text-2xl font-bold text-white">Ready to book {service.name.toLowerCase()}?</h2>
-          <Button href="/appointment" size="lg" icon={<ArrowRight className="h-4 w-4" />}>
-            Book an Appointment
+          <Button href="/contact" size="lg" icon={<ArrowRight className="h-4 w-4" />}>
+            Contact Us
           </Button>
         </Container>
       </section>

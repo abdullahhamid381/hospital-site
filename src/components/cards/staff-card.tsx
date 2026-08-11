@@ -36,15 +36,9 @@ export function StaffCard({ staff }: { staff: StaffMember }) {
           <Button href={`/staff/${staff.slug}`} variant="outline" size="sm" className="flex-1">
             View Profile
           </Button>
-          {staff.appointmentEnabled ? (
-            <Button href="/appointment" size="sm" className="flex-1">
-              Book
-            </Button>
-          ) : (
-            <Button href="/contact" size="sm" className="flex-1">
-              Contact
-            </Button>
-          )}
+          <Button href="/contact" size="sm" className="flex-1">
+            Contact
+          </Button>
         </div>
       </div>
     </div>

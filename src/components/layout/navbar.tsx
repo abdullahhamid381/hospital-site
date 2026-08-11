@@ -4,18 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, Search, Siren } from "lucide-react";
+import { Menu } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/data/site";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { MobileMenu } from "@/components/layout/mobile-menu";
-import { SearchModal } from "@/components/layout/search-modal";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -66,22 +64,9 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setSearchOpen(true)}
-              aria-label="Search"
-              className="hidden md:flex h-10 w-10 items-center justify-center rounded-full border border-border text-text hover:border-primary hover:text-primary transition-colors"
-            >
-              <Search className="h-[18px] w-[18px]" />
-            </button>
             <ThemeToggle className="hidden md:flex" />
-            <a
-              href={`tel:${SITE.emergencyPhone.replace(/\s/g, "")}`}
-              className="hidden xl:flex h-10 items-center gap-2 rounded-full bg-primary-light px-4 text-xs font-semibold text-primary"
-            >
-              <Siren className="h-3.5 w-3.5" /> Emergency
-            </a>
-            <Button href="/appointment" size="sm" className="hidden md:inline-flex">
-              Book Appointment
+            <Button href="/contact" size="sm" className="hidden md:inline-flex">
+              Contact Us
             </Button>
             <button
               onClick={() => setMobileOpen(true)}
@@ -95,7 +80,6 @@ export function Navbar() {
       </header>
 
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
-      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

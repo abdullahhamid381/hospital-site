@@ -5,7 +5,6 @@ import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { ServicesSection } from "@/components/sections/services-section";
 import { DepartmentsSection } from "@/components/sections/departments-section";
 import { DoctorsSection } from "@/components/sections/doctors-section";
-import { StaffSection } from "@/components/sections/staff-section";
 import { AppointmentSection } from "@/components/sections/appointment-section";
 import { Emergency } from "@/components/sections/emergency";
 import { FacilitiesSection } from "@/components/sections/facilities-section";
@@ -32,7 +31,6 @@ export default function Home() {
       <ServicesSection />
       <DepartmentsSection />
       <DoctorsSection />
-      <StaffSection />
       <AppointmentSection />
       <Emergency />
       <FacilitiesSection />

@@ -43,7 +43,7 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
                 href="/admin/staff"
                 className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-secondary hover:text-text"
               >
-                Staff
+                Faculty
               </Link>
               <Link
                 href="/admin/admins"

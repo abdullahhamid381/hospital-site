@@ -49,7 +49,7 @@ export default async function StaffDetailPage({ params }: { params: Promise<{ sl
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-text-muted">
           <Link href="/" className="hover:text-primary">Home</Link>
           <span>/</span>
-          <Link href="/staff" className="hover:text-primary">Staff & Faculty</Link>
+          <Link href="/staff" className="hover:text-primary">Our Faculty</Link>
           <span>/</span>
           <span className="text-text">{staff.name}</span>
         </nav>
@@ -83,9 +83,9 @@ export default async function StaffDetailPage({ params }: { params: Promise<{ sl
                 )}
               </div>
               {staff.appointmentEnabled ? (
-                <Button href="#book" className="mt-6 w-full">Book Appointment</Button>
+                <Button href="#book" className="mt-6 w-full">Contact Us</Button>
               ) : (
-                <Button href="#contact" className="mt-6 w-full">Contact</Button>
+                <Button href="#contact" className="mt-6 w-full">Contact Us</Button>
               )}
             </div>
           </Reveal>
@@ -206,7 +206,7 @@ export default async function StaffDetailPage({ params }: { params: Promise<{ sl
         <section id="book" className="scroll-mt-24 py-24 md:py-32">
           <Container>
             <Reveal>
-              <h2 className="section-headline text-balance font-bold text-text">Book with {staff.name}</h2>
+              <h2 className="section-headline text-balance font-bold text-text">Contact {staff.name}</h2>
             </Reveal>
             <Reveal delay={0.1} className="mt-12">
               <AppointmentForm />

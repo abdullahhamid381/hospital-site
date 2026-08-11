@@ -44,7 +44,7 @@ export default async function PackageDetailPage({ params }: { params: Promise<{ 
               ))}
             </ul>
 
-            <Button href="/appointment" size="lg" className="mt-8">Book This Package</Button>
+            <Button href="/contact" size="lg" className="mt-8">Contact Us</Button>
           </Reveal>
         </Container>
       </section>
