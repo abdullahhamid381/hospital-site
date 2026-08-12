@@ -4,14 +4,18 @@ import { Container } from "@/components/ui/primitives";
 import { Reveal, StaggerGroup } from "@/components/ui/reveal";
 import { DoctorCard } from "@/components/cards/doctor-card";
 import { FinalCTA } from "@/components/sections/final-cta";
-import { DOCTORS } from "@/lib/data/doctors";
+import { getDoctors } from "@/lib/doctors";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Our Doctors",
   description: "Meet our complete team of consultant specialists across every department.",
 };
 
-export default function DoctorsPage() {
+export default async function DoctorsPage() {
+  const doctors = (await getDoctors()).filter((d) => d.isVisible);
+
   return (
     <>
       <PageHero
@@ -22,7 +26,7 @@ export default function DoctorsPage() {
       <section className="py-24 md:py-32">
         <Container>
           <StaggerGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {DOCTORS.map((d) => (
+            {doctors.map((d) => (
               <Reveal key={d.slug}>
                 <DoctorCard doctor={d} />
               </Reveal>

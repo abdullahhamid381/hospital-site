@@ -167,3 +167,36 @@ export function ensureStaffTable(): Promise<void> {
   }
   return staffReady;
 }
+
+let doctorsReady: Promise<void> | null = null;
+
+/** Same lazy self-creation reasoning as ensureAboutSectionsTable(). */
+export function ensureDoctorsTable(): Promise<void> {
+  if (!doctorsReady) {
+    doctorsReady = (async () => {
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS doctors (
+          id SERIAL PRIMARY KEY,
+          slug TEXT NOT NULL UNIQUE,
+          name TEXT NOT NULL,
+          specialization TEXT NOT NULL,
+          department TEXT NOT NULL,
+          experience TEXT NOT NULL,
+          qualifications JSONB NOT NULL DEFAULT '[]',
+          languages JSONB NOT NULL DEFAULT '[]',
+          available_days TEXT NOT NULL,
+          available_timings TEXT NOT NULL,
+          bio TEXT NOT NULL,
+          expertise JSONB NOT NULL DEFAULT '[]',
+          image TEXT NOT NULL,
+          sort_order INTEGER NOT NULL DEFAULT 0,
+          is_visible BOOLEAN NOT NULL DEFAULT true,
+          created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+        );
+      `);
+      await pool.query(`CREATE INDEX IF NOT EXISTS doctors_sort_idx ON doctors (sort_order);`);
+    })();
+  }
+  return doctorsReady;
+}

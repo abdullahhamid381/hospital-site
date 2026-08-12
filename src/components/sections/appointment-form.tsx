@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { CalendarCheck, Clock3, ShieldCheck, Siren, CheckCircle2 } from "lucide-react";
 import { DEPARTMENTS } from "@/lib/data/departments";
-import { DOCTORS } from "@/lib/data/doctors";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +14,14 @@ const inputClass =
 export function AppointmentForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [doctors, setDoctors] = useState<{ slug: string; name: string }[]>([]);
+
+  useEffect(() => {
+    fetch("/api/doctors")
+      .then((res) => res.json())
+      .then((data) => setDoctors(data.doctors ?? []))
+      .catch(() => {});
+  }, []);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -88,7 +95,7 @@ export function AppointmentForm() {
             <label className="mb-1.5 block text-xs font-semibold text-text">Doctor (optional)</label>
             <select name="doctor" className={cn(inputClass, "border-border")} defaultValue="">
               <option value="">No preference</option>
-              {DOCTORS.map((d) => (
+              {doctors.map((d) => (
                 <option key={d.slug} value={d.name}>{d.name}</option>
               ))}
             </select>

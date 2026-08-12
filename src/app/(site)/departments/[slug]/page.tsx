@@ -6,15 +6,13 @@ import { Container, Badge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { unsplash } from "@/lib/unsplash";
-import { DEPARTMENTS, getDepartmentBySlug } from "@/lib/data/departments";
-import { DOCTORS } from "@/lib/data/doctors";
+import { getDepartmentBySlug } from "@/lib/data/departments";
+import { getDoctors } from "@/lib/doctors";
 import { DoctorCard } from "@/components/cards/doctor-card";
 import { FAQSection } from "@/components/sections/faq-section";
 import { SITE } from "@/lib/data/site";
 
-export function generateStaticParams() {
-  return DEPARTMENTS.map((d) => ({ slug: d.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -28,8 +26,9 @@ export default async function DepartmentDetailPage({ params }: { params: Promise
   const dept = getDepartmentBySlug(slug);
   if (!dept) notFound();
 
-  const doctors = DOCTORS.filter((d) => d.department.toLowerCase() === dept.name.replace(" Department", "").toLowerCase()).slice(0, 3);
-  const fallbackDoctors = doctors.length ? doctors : DOCTORS.slice(0, 3);
+  const allDoctors = (await getDoctors()).filter((d) => d.isVisible);
+  const doctors = allDoctors.filter((d) => d.department.toLowerCase() === dept.name.replace(" Department", "").toLowerCase()).slice(0, 3);
+  const fallbackDoctors = doctors.length ? doctors : allDoctors.slice(0, 3);
 
   return (
     <>

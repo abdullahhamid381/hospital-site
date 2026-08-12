@@ -40,10 +40,16 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
                 Services
               </Link>
               <Link
+                href="/admin/doctors"
+                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-secondary hover:text-text"
+              >
+                Doctors
+              </Link>
+              <Link
                 href="/admin/staff"
                 className="rounded-full px-3.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-bg-secondary hover:text-text"
               >
-                Faculty
+                Admin & Staff
               </Link>
               <Link
                 href="/admin/admins"

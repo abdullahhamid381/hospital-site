@@ -10,8 +10,8 @@ import { SITE } from "@/lib/data/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Our Faculty",
-  description: `Meet the leadership, nursing, academic faculty, and support staff behind ${SITE.name}.`,
+  title: "Administration & Staff",
+  description: `Meet the leadership, nursing, academic, and support staff behind ${SITE.name}.`,
 };
 
 export default async function StaffPage() {
@@ -21,7 +21,7 @@ export default async function StaffPage() {
   const categoryCount = new Set(staff.map((s) => s.category)).size;
 
   const stats = [
-    { value: staff.length, suffix: "+", label: "Faculty & Staff" },
+    { value: staff.length, suffix: "+", label: "Administration & Staff" },
     { value: departmentCount, suffix: "", label: "Departments Represented" },
     { value: categoryCount, suffix: "", label: "Staff Categories" },
   ];
@@ -29,9 +29,9 @@ export default async function StaffPage() {
   return (
     <>
       <PageHero
-        eyebrow="Our Faculty"
-        title="Our Faculty"
-        description="Leadership, nursing and clinical support, academic faculty, and the wider team dedicated to running the hospital every day."
+        eyebrow="Our Team"
+        title="Administration & Staff"
+        description="Leadership, nursing and clinical support, academic staff, and the wider team dedicated to running the hospital every day."
       />
 
       <section className="border-b border-border bg-bg-secondary py-14">

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/lib/icon-map";
 import { resolveImageSrc, isUnsplashSrc } from "@/lib/image-src";
 import { getServices, getServiceBySlug } from "@/lib/services";
-import { DOCTORS } from "@/lib/data/doctors";
+import { getDoctors } from "@/lib/doctors";
 import { DoctorCard } from "@/components/cards/doctor-card";
 import { FAQSection } from "@/components/sections/faq-section";
 import { ServiceCard } from "@/components/cards/service-card";
@@ -28,7 +28,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (!service) notFound();
 
   const related = (await getServices()).filter((s) => s.isVisible && s.slug !== service.slug).slice(0, 3);
-  const doctors = DOCTORS.slice(0, 3);
+  const doctors = (await getDoctors()).filter((d) => d.isVisible).slice(0, 3);
   const imageSrc = resolveImageSrc(service.image, 900);
 
   return (

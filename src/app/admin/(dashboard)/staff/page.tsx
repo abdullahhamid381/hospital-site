@@ -544,9 +544,9 @@ export default function StaffAdminPage() {
   return (
     <div>
       <div>
-        <h1 className="font-display text-2xl font-bold text-text">Our Faculty</h1>
+        <h1 className="font-display text-2xl font-bold text-text">Administration & Staff</h1>
         <p className="mt-1 text-sm text-text-muted">
-          Powers the /staff directory page. Not shown on the homepage, and separate from the Doctors directory.
+          Powers the /staff directory page. Not shown on the homepage, and separate from the Doctors directory — doctors are never listed here.
         </p>
       </div>
 

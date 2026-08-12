@@ -38,7 +38,7 @@ export function BlogCard({ post, featured = false }: { post: BlogPost; featured?
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-elevated)] ${
+      className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-elevated)] ${
         featured ? "md:flex-row" : ""
       }`}
     >
@@ -92,7 +92,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 export function PackageCard({ pkg }: { pkg: HealthPackage }) {
   return (
-    <div className="flex flex-col rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-[var(--shadow-elevated)]">
+    <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-[var(--shadow-elevated)]">
       <h3 className="font-display text-lg font-bold text-text">{pkg.name}</h3>
       <p className="mt-1 text-sm text-text-muted">{pkg.short}</p>
       <p className="mt-4 font-display text-2xl font-extrabold text-primary">{pkg.price}</p>

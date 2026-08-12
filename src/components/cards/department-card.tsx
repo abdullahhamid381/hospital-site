@@ -8,7 +8,7 @@ export function DepartmentCard({ dept }: { dept: Department }) {
   return (
     <Link
       href={`/departments/${dept.slug}`}
-      className="group flex w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-elevated)] md:w-auto"
+      className="group flex h-full w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-elevated)] md:w-auto"
     >
       <div className="relative h-48 overflow-hidden">
         <Image

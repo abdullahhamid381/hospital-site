@@ -1,27 +1,11 @@
-export type Doctor = {
-  id: number;
-  slug: string;
-  name: string;
-  specialization: string;
-  department: string;
-  experience: string;
-  qualifications: string[];
-  languages: string[];
-  availableDays: string;
-  availableTimings: string;
-  bio: string;
-  expertise: string[];
-  image: string;
-  sortOrder: number;
-  isVisible: boolean;
-  createdAt: string | null;
-  updatedAt: string | null;
-};
+const { Pool } = require("pg");
 
-type DefaultDoctorEntry = Omit<Doctor, "id" | "sortOrder" | "isVisible" | "createdAt" | "updatedAt">;
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
 
-/** In-memory fallback/seed source, used when the `doctors` table is empty. */
-export const DEFAULT_DOCTORS: Doctor[] = ([
+const DEFAULT_DOCTORS = [
   {
     slug: "dr-imran-farooq",
     name: "Dr. Imran Farooq",
@@ -134,11 +118,57 @@ export const DEFAULT_DOCTORS: Doctor[] = ([
     expertise: ["Diabetes Management", "Hypertension", "Preventive Screening", "Chronic Disease Care"],
     image: "photo-1607990281513-2c110a25bd8c",
   },
-] satisfies DefaultDoctorEntry[]).map((d, i) => ({
-  ...d,
-  id: i + 1,
-  sortOrder: i,
-  isVisible: true,
-  createdAt: null,
-  updatedAt: null,
-}));
+];
+
+async function main() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS doctors (
+      id SERIAL PRIMARY KEY,
+      slug TEXT NOT NULL UNIQUE,
+      name TEXT NOT NULL,
+      specialization TEXT NOT NULL,
+      department TEXT NOT NULL,
+      experience TEXT NOT NULL,
+      qualifications JSONB NOT NULL DEFAULT '[]',
+      languages JSONB NOT NULL DEFAULT '[]',
+      available_days TEXT NOT NULL,
+      available_timings TEXT NOT NULL,
+      bio TEXT NOT NULL,
+      expertise JSONB NOT NULL DEFAULT '[]',
+      image TEXT NOT NULL,
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      is_visible BOOLEAN NOT NULL DEFAULT true,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+  `);
+  await pool.query(`CREATE INDEX IF NOT EXISTS doctors_sort_idx ON doctors (sort_order);`);
+
+  const { rows } = await pool.query("SELECT COUNT(*)::int AS n FROM doctors");
+  if (rows[0].n > 0) {
+    console.log("doctors already seeded, skipping.");
+    await pool.end();
+    return;
+  }
+
+  for (let i = 0; i < DEFAULT_DOCTORS.length; i++) {
+    const d = DEFAULT_DOCTORS[i];
+    await pool.query(
+      `INSERT INTO doctors (slug, name, specialization, department, experience, qualifications, languages, available_days, available_timings, bio, expertise, image, sort_order, is_visible)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,true)`,
+      [
+        d.slug, d.name, d.specialization, d.department, d.experience,
+        JSON.stringify(d.qualifications), JSON.stringify(d.languages),
+        d.availableDays, d.availableTimings, d.bio, JSON.stringify(d.expertise),
+        d.image, i,
+      ]
+    );
+  }
+  console.log(`Seeded doctors with ${DEFAULT_DOCTORS.length} default doctors.`);
+  await pool.end();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

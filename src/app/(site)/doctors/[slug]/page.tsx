@@ -6,34 +6,34 @@ import { Container, Badge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { AppointmentForm } from "@/components/sections/appointment-form";
-import { unsplash } from "@/lib/unsplash";
-import { DOCTORS, getDoctorBySlug } from "@/lib/data/doctors";
+import { resolveImageSrc, isUnsplashSrc } from "@/lib/image-src";
+import { getDoctorBySlug } from "@/lib/doctors";
 import { TESTIMONIALS } from "@/lib/data/misc";
 import { TestimonialCard } from "@/components/cards/misc-cards";
 
-export function generateStaticParams() {
-  return DOCTORS.map((d) => ({ slug: d.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const doctor = getDoctorBySlug(slug);
+  const doctor = await getDoctorBySlug(slug);
   if (!doctor) return {};
   return { title: doctor.name, description: `${doctor.specialization} — ${doctor.experience}` };
 }
 
 export default async function DoctorProfilePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const doctor = getDoctorBySlug(slug);
+  const doctor = await getDoctorBySlug(slug);
   if (!doctor) notFound();
+
+  const imageSrc = resolveImageSrc(doctor.image, 700);
 
   return (
     <>
       <section className="border-b border-border py-16 md:py-24">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[380px_1fr]">
           <Reveal className="lg:sticky lg:top-28 lg:self-start">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-border">
-              <Image src={unsplash(doctor.image, 700)} alt={doctor.name} fill className="object-cover" />
+            <div className="relative aspect-4/5 overflow-hidden rounded-[28px] border border-border">
+              <Image src={imageSrc} alt={doctor.name} fill unoptimized={!isUnsplashSrc(imageSrc)} className="object-cover" />
             </div>
             <div className="mt-6 rounded-2xl border border-border bg-card p-6">
               <div className="space-y-4 text-sm">

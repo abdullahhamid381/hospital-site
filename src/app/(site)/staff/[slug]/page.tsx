@@ -49,7 +49,7 @@ export default async function StaffDetailPage({ params }: { params: Promise<{ sl
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-text-muted">
           <Link href="/" className="hover:text-primary">Home</Link>
           <span>/</span>
-          <Link href="/staff" className="hover:text-primary">Our Faculty</Link>
+          <Link href="/staff" className="hover:text-primary">Administration & Staff</Link>
           <span>/</span>
           <span className="text-text">{staff.name}</span>
         </nav>
