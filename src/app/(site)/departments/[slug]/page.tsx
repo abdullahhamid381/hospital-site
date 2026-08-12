@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Users, Clock3, ArrowRight, Siren } from "lucide-react";
 import { Container, Badge } from "@/components/ui/primitives";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { unsplash } from "@/lib/unsplash";
 import { getDepartmentBySlug } from "@/lib/data/departments";
 import { getDoctors } from "@/lib/doctors";
+import { matchDepartmentDoctors, withLiveSpecialistCount } from "@/lib/departments";
 import { DoctorCard } from "@/components/cards/doctor-card";
 import { FAQSection } from "@/components/sections/faq-section";
 import { SITE } from "@/lib/data/site";
@@ -27,8 +29,8 @@ export default async function DepartmentDetailPage({ params }: { params: Promise
   if (!dept) notFound();
 
   const allDoctors = (await getDoctors()).filter((d) => d.isVisible);
-  const doctors = allDoctors.filter((d) => d.department.toLowerCase() === dept.name.replace(" Department", "").toLowerCase()).slice(0, 3);
-  const fallbackDoctors = doctors.length ? doctors : allDoctors.slice(0, 3);
+  const doctors = matchDepartmentDoctors(dept, allDoctors).slice(0, 3);
+  const liveDept = withLiveSpecialistCount(dept, allDoctors);
 
   return (
     <>
@@ -67,7 +69,7 @@ export default async function DepartmentDetailPage({ params }: { params: Promise
                 <Users className="h-5 w-5 text-primary" />
                 <div>
                   <p className="text-xs text-text-muted">Specialists</p>
-                  <p className="text-sm font-bold text-text">{dept.specialists} Consultants</p>
+                  <p className="text-sm font-bold text-text">{liveDept.specialists} Consultants</p>
                 </div>
               </div>
             </div>
@@ -99,13 +101,25 @@ export default async function DepartmentDetailPage({ params }: { params: Promise
           <Reveal>
             <h2 className="font-display text-2xl font-bold text-text">Department Doctors</h2>
           </Reveal>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {fallbackDoctors.map((d) => (
-              <Reveal key={d.slug}>
-                <DoctorCard doctor={d} />
-              </Reveal>
-            ))}
-          </div>
+          {doctors.length > 0 ? (
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {doctors.map((d) => (
+                <Reveal key={d.slug}>
+                  <DoctorCard doctor={d} />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <Reveal delay={0.1} className="mt-10 rounded-2xl border border-dashed border-border p-10 text-center">
+              <p className="text-sm text-text-muted">
+                No doctors are currently listed for this department. Visit our{" "}
+                <Link href="/doctors" className="font-semibold text-primary hover:underline">
+                  full doctors directory
+                </Link>{" "}
+                or contact the hospital for assistance.
+              </p>
+            </Reveal>
+          )}
         </Container>
       </section>
 

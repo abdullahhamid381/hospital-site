@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { GraduationCap, Clock3, CalendarDays, Languages, Star } from "lucide-react";
+import { GraduationCap, Clock3, CalendarDays, Languages, Star, Building2 } from "lucide-react";
 import { Container, Badge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -89,6 +89,12 @@ export default async function DoctorProfilePage({ params }: { params: Promise<{ 
                 </li>
               ))}
             </ul>
+            <div className="mt-4">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-white dark:bg-white dark:text-black">
+                <Building2 className="h-3 w-3" />
+                {doctor.department}
+              </span>
+            </div>
 
             <h2 className="mt-10 font-display text-xl font-bold text-text">Patient Reviews</h2>
             <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">

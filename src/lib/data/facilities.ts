@@ -111,6 +111,46 @@ export const FACILITIES: Facility[] = [
       "Our ambulance fleet is equipped for emergency transport with trained paramedics, dispatched around the clock.",
     image: "photo-1587745416684-47953f16f02f",
   },
+  {
+    slug: "ultrasound",
+    name: "Ultrasound",
+    short: "On-site ultrasound imaging for fast, accurate diagnostics.",
+    description:
+      "Our ultrasound suite provides real-time diagnostic imaging for obstetric, abdominal, and general clinical use, with results available the same day.",
+    image: "photo-1516549655169-df83a0774514",
+  },
+  {
+    slug: "indoor-patient-department",
+    name: "Indoor Patient Department (IPD)",
+    short: "Dedicated inpatient wards for admitted patients.",
+    description:
+      "Our Indoor Patient Department provides round-the-clock nursing care and physician oversight for admitted patients across general and specialized wards.",
+    image: "photo-1538108149393-fbbd81895907",
+  },
+  {
+    slug: "labor-room",
+    name: "Labor Room",
+    short: "Dedicated maternity suite for safe delivery care.",
+    description:
+      "Our labor room is staffed by experienced obstetric and nursing teams, equipped for both normal delivery and emergency obstetric care.",
+    image: "photo-1622253692010-333f2da6031d",
+  },
+  {
+    slug: "digital-xray",
+    name: "Digital X-Ray",
+    short: "Fast, high-resolution digital radiography on-site.",
+    description:
+      "Our digital X-ray suite delivers high-resolution imaging with rapid turnaround, supporting diagnosis across every department.",
+    image: "photo-1579154204601-01588f351e67",
+  },
+  {
+    slug: "childrens-nursery-nicu",
+    name: "Children's Nursery & NICU",
+    short: "Specialized newborn and pediatric critical care.",
+    description:
+      "Our nursery and neonatal ICU provide dedicated monitoring and critical care for newborns and children, staffed by pediatric-trained nurses and physicians.",
+    image: "photo-1584515979956-d9f6e5d09982",
+  },
 ];
 
 export function getFacilityBySlug(slug: string) {

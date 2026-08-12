@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/primitives";
-import { Reveal, StaggerGroup } from "@/components/ui/reveal";
-import { DoctorCard } from "@/components/cards/doctor-card";
+import { DoctorsGrid } from "@/components/sections/doctors-grid";
 import { FinalCTA } from "@/components/sections/final-cta";
 import { getDoctors } from "@/lib/doctors";
 
@@ -25,13 +24,7 @@ export default async function DoctorsPage() {
       />
       <section className="py-24 md:py-32">
         <Container>
-          <StaggerGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {doctors.map((d) => (
-              <Reveal key={d.slug}>
-                <DoctorCard doctor={d} />
-              </Reveal>
-            ))}
-          </StaggerGroup>
+          <DoctorsGrid doctors={doctors} />
         </Container>
       </section>
       <FinalCTA />

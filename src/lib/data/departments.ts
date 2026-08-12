@@ -50,7 +50,7 @@ export const DEPARTMENTS: Department[] = [
     overview:
       "Our Pediatrics Department cares for newborns through adolescents, with a dedicated neonatal care unit and a child-friendly ward designed to ease anxiety.",
     specialists: 5,
-    hours: "Mon–Sat, 8:00 AM – 9:00 PM",
+    hours: "Daily, from 6:00 PM",
     services: ["Newborn Care", "Vaccination", "Growth Monitoring", "Adolescent Health"],
     image: "photo-1584515979956-d9f6e5d09982",
   },
@@ -61,7 +61,7 @@ export const DEPARTMENTS: Department[] = [
     overview:
       "The Gynecology Department provides prenatal, postnatal, and general reproductive health services, with an in-house ultrasound suite and dedicated labor rooms.",
     specialists: 5,
-    hours: "Mon–Sat, 9:00 AM – 8:00 PM",
+    hours: "Daily, 10:00 AM – 2:00 PM",
     services: ["Prenatal Care", "Labor & Delivery", "Gynecological Surgery", "Fertility Counselling"],
     image: "photo-1622253692010-333f2da6031d",
   },
@@ -72,7 +72,7 @@ export const DEPARTMENTS: Department[] = [
     overview:
       "Our Neurology Department is equipped for stroke response and long-term management of neurological conditions, with EEG and imaging available on-site.",
     specialists: 4,
-    hours: "Mon–Fri, 9:00 AM – 6:00 PM",
+    hours: "Thursday & Friday, 12:00 PM – 5:00 PM",
     services: ["Stroke Care", "EEG Diagnostics", "Movement Disorders", "Neuro-Rehabilitation"],
     image: "photo-1559757175-5700dde675bc",
   },
@@ -83,7 +83,7 @@ export const DEPARTMENTS: Department[] = [
     overview:
       "The Orthopedics Department treats fractures, joint conditions, and sports injuries, with a joint-replacement programme and on-site physiotherapy.",
     specialists: 5,
-    hours: "Mon–Sat, 9:00 AM – 8:00 PM",
+    hours: "Daily, 2:00 PM – 6:00 PM",
     services: ["Joint Replacement", "Fracture Care", "Sports Medicine", "Physiotherapy"],
     image: "photo-1579684385127-1ef15d508118",
   },
@@ -94,7 +94,7 @@ export const DEPARTMENTS: Department[] = [
     overview:
       "Our Radiology Department houses digital X-ray, CT, ultrasound, and MRI, with radiologist-reviewed reporting available same-day for most studies.",
     specialists: 4,
-    hours: "Open 24 hours, every day",
+    hours: "Daily, 3:00 PM – 6:00 PM",
     services: ["X-Ray", "CT Scan", "MRI", "Ultrasound"],
     image: "photo-1516549655169-df83a0774514",
   },
@@ -119,6 +119,61 @@ export const DEPARTMENTS: Department[] = [
     hours: "Open 24 hours, every day",
     services: ["Prescription Dispensing", "Medication Counselling", "Home Delivery", "Inventory Assurance"],
     image: "photo-1587854692152-cbe660dbde88",
+  },
+  {
+    slug: "urology",
+    name: "Urology Department",
+    short: "Diagnosis and treatment of urinary and reproductive tract conditions.",
+    overview:
+      "The Urology Department treats conditions of the kidney, bladder, and urinary tract with both medical management and minimally invasive laparoscopic surgery.",
+    specialists: 1,
+    hours: "Daily, 3:00 PM – 7:00 PM",
+    services: ["Kidney & Bladder Care", "Laparoscopic Urology", "Male Infertility Treatment", "Urinary Tract Disorders"],
+    image: "photo-1666214280391-8ff5bd3c0bf0",
+  },
+  {
+    slug: "ent",
+    name: "ENT Department",
+    short: "Ear, nose, and throat care for all ages.",
+    overview:
+      "Our ENT Department manages hearing conditions, sinus disorders, and throat conditions using modern diagnostic and endoscopic surgical equipment.",
+    specialists: 2,
+    hours: "Wed, Fri, Sat, Sun, 2:00 PM – 5:00 PM",
+    services: ["Ear, Nose & Throat Care", "Endoscopic Surgery", "Hearing Evaluation", "Sinus Treatment"],
+    image: "photo-1559757175-0eb30cd8c063",
+  },
+  {
+    slug: "ophthalmology",
+    name: "Ophthalmology Department",
+    short: "Comprehensive eye care, LASIK, and retina treatment.",
+    overview:
+      "The Ophthalmology Department provides general eye care alongside specialized LASIK and retina surgery services.",
+    specialists: 1,
+    hours: "Wed, Fri, Sun — contact hospital for timing",
+    services: ["General Eye Care", "LASIK Surgery", "Retina Surgery", "Cataract Evaluation"],
+    image: "photo-1516549655169-df83a0774514",
+  },
+  {
+    slug: "dentistry",
+    name: "Dentistry Department",
+    short: "General and cosmetic dentistry for the whole family.",
+    overview:
+      "Our Dentistry Department provides routine checkups, restorative treatment, and orthodontic care in a comfortable, modern setting.",
+    specialists: 1,
+    hours: "Monday – Friday, 5:00 PM – 7:00 PM",
+    services: ["Routine & Restorative Care", "Orthodontics", "Digital Dental X-Ray", "Pediatric Dentistry"],
+    image: "photo-1600959907703-125ba1374a12",
+  },
+  {
+    slug: "oral-maxillofacial-surgery",
+    name: "Oral & Maxillofacial Surgery Department",
+    short: "Facial trauma, tumors, and cleft lip & palate surgery.",
+    overview:
+      "Our Oral & Maxillofacial Surgery Department treats congenital cleft lip and palate, facial tumors, major lacerations, and performs facial and jaw cosmetic surgery.",
+    specialists: 1,
+    hours: "Friday, 1:00 PM – 7:00 PM",
+    services: ["Cleft Lip & Palate Surgery", "Facial Tumor Surgery", "Facial Trauma & Reconstruction", "Facial & Jaw Cosmetic Surgery"],
+    image: "photo-1600959907703-125ba1374a12",
   },
 ];
 
