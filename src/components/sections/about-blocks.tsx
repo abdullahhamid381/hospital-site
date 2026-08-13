@@ -18,18 +18,42 @@ import type {
 
 export function AboutIntroBlock({ content }: { content: IntroContent }) {
   const imageSrc = resolveImageSrc(content.imageId, 900);
+  const hasVideo = Boolean(content.videoUrl);
+
   return (
     <section className="py-24 md:py-32">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <div className="relative aspect-4/5 w-full overflow-hidden rounded-[28px] border border-border">
-            <Image
-              src={imageSrc}
-              alt="Hospital reception and interior"
-              fill
-              unoptimized={!isUnsplashSrc(imageSrc)}
-              className="object-cover"
-            />
+          <div className="relative aspect-4/5 w-full overflow-hidden rounded-[28px] border border-border shadow-[var(--shadow-elevated)]">
+            {hasVideo ? (
+              <>
+                <video
+                  src={content.videoUrl}
+                  poster={imageSrc}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="h-full w-full object-cover"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-black/60 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-white backdrop-blur-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                  </span>
+                  Hospital Tour
+                </span>
+              </>
+            ) : (
+              <Image
+                src={imageSrc}
+                alt="Hospital reception and interior"
+                fill
+                unoptimized={!isUnsplashSrc(imageSrc)}
+                className="object-cover"
+              />
+            )}
           </div>
         </Reveal>
 

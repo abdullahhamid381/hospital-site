@@ -13,6 +13,8 @@ export type IntroContent = {
   paragraph1: string;
   paragraph2: string;
   imageId: string;
+  /** Optional — when set, a video plays in place of the photo (imageId is still used as its poster frame). */
+  videoUrl?: string;
   features: AboutFeature[];
   ctaLabel: string;
   ctaHref: string;
@@ -76,6 +78,7 @@ export function isValidIntroContent(value: unknown): value is IntroContent {
   ) {
     return false;
   }
+  if (v.videoUrl !== undefined && typeof v.videoUrl !== "string") return false;
   if (!Array.isArray(v.features) || v.features.length === 0 || v.features.length > 8) return false;
   return v.features.every((f) => f && isNonEmptyString(f.icon) && isNonEmptyString(f.title));
 }
@@ -141,6 +144,7 @@ export function defaultContentForType(type: AboutSectionType): AboutSectionConte
         paragraph1: "",
         paragraph2: "",
         imageId: "photo-1519494026892-80bbd2d6fd0d",
+        videoUrl: "",
         features: [{ icon: "Sparkles", title: "New Feature" }],
         ctaLabel: "Learn More About Us",
         ctaHref: "/about",

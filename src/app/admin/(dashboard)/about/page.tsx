@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { Plus, Trash2, Pencil, Check, X, ChevronUp, ChevronDown, Eye, EyeOff, Home } from "lucide-react";
 import { ICON_NAMES, Icon } from "@/lib/icon-map";
 import { ImageField } from "@/components/admin/image-field";
+import { VideoField } from "@/components/admin/video-field";
 import { cn } from "@/lib/utils";
 import {
   ABOUT_SECTION_TYPES,
@@ -124,8 +125,14 @@ function SectionContentForm({
     return (
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr]">
-          <div>
+          <div className="flex flex-col gap-4">
             <ImageField label="Photo" value={c.imageId} onChange={(imageId) => onChange({ ...c, imageId })} aspectClassName="aspect-4/5" />
+            <VideoField
+              label="Video (optional — replaces the photo when set)"
+              value={c.videoUrl ?? ""}
+              onChange={(videoUrl) => onChange({ ...c, videoUrl })}
+              aspectClassName="aspect-4/5"
+            />
           </div>
           <div className="flex flex-col gap-4">
             <Field label="Badge">
