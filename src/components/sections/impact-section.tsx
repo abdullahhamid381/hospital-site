@@ -78,17 +78,19 @@ export function ImpactSection() {
 
   useEffect(() => {
     if (range.from > range.to) return;
-    const controller = new AbortController();
+    let ignore = false;
     startTransition(async () => {
       try {
-        const res = await fetch(`/api/impact?from=${range.from}&to=${range.to}`, { signal: controller.signal });
+        const res = await fetch(`/api/impact?from=${range.from}&to=${range.to}`);
         const data = await res.json();
-        if (data?.totals) setTotals(data.totals);
+        if (!ignore && data?.totals) setTotals(data.totals);
       } catch (err) {
-        if ((err as Error).name !== "AbortError") console.error(err);
+        if (!ignore) console.error(err);
       }
     });
-    return () => controller.abort();
+    return () => {
+      ignore = true;
+    };
   }, [range.from, range.to]);
 
   const total = useMemo(

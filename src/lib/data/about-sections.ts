@@ -201,6 +201,7 @@ export const DEFAULT_ABOUT_SECTIONS: AboutSection[] = [
       paragraph2:
         "Our vision is to be the region's most trusted healthcare institution, known equally for clinical excellence and genuine compassion.",
       imageId: "photo-1519494026892-80bbd2d6fd0d",
+      videoUrl: "https://videos.pexels.com/video-files/8413486/8413486-hd_1280_720_25fps.mp4",
       features: [
         { icon: "Users", title: "Experienced Specialists" },
         { icon: "Cpu", title: "Advanced Technology" },

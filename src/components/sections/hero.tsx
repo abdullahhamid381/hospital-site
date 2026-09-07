@@ -22,10 +22,12 @@ export function Hero() {
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-14 px-6 md:px-10 lg:grid-cols-2 lg:gap-10">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
           <Badge>Trusted Healthcare • 24/7</Badge>
-          <h1 className="hero-headline text-balance mt-6 font-extrabold text-text">
+          <h1 className="hero-headline text-balance mt-6 wrap-break-word font-extrabold text-text">
             Advanced Healthcare.
             <br />
-            <span className="text-primary">Compassionate</span> Care.
+            <span className="text-primary">Compassionate</span>
+            <br />
+            Care.
           </h1>
           <p className="mt-6 max-w-md text-base leading-relaxed text-text-muted">
             Delivering trusted medical care through experienced specialists, advanced technology, and patient-centered healthcare — every hour of every day.

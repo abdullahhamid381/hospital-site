@@ -80,13 +80,13 @@ export function ChatbotWidget() {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="fixed bottom-24 right-6 z-40 flex h-[min(32rem,70vh)] w-[min(23rem,calc(100vw-3rem))] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-elevated)]"
           >
-            <div className="flex items-center gap-3 border-b border-border bg-black px-5 py-4 text-white">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10">
+            <div className="flex items-center gap-3 border-b border-border bg-primary px-5 py-4 text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15">
                 <MessageCircle className="h-4 w-4" />
               </span>
               <div>
                 <p className="text-sm font-bold">{SITE.shortName} Assistant</p>
-                <p className="text-xs text-white/60">Ask about doctors, services & more</p>
+                <p className="text-xs text-white/75">Ask about doctors, services & more</p>
               </div>
             </div>
 

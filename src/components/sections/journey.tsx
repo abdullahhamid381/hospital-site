@@ -16,7 +16,7 @@ export function Journey() {
   const lineProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section className="bg-bg-secondary py-24 md:py-32">
+    <section className="py-24 md:py-32 bg-white">
       <Container>
         <Reveal>
           <SectionHeading
