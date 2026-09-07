@@ -1,8 +1,8 @@
-export type ImpactPeriod = "yearly" | "5year" | "custom";
+export type ImpactPeriod = "today" | "month" | "custom";
 
 export const IMPACT_PERIODS: { key: ImpactPeriod; label: string }[] = [
-  { key: "yearly", label: "Yearly" },
-  { key: "5year", label: "Last 5 Years" },
+  { key: "today", label: "Today" },
+  { key: "month", label: "Last Month" },
   { key: "custom", label: "Custom Range" },
 ];
 

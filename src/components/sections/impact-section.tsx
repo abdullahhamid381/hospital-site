@@ -60,7 +60,7 @@ function useCountUp(target: number, active: boolean) {
 }
 
 export function ImpactSection() {
-  const [period, setPeriod] = useState<ImpactPeriod>("yearly");
+  const [period, setPeriod] = useState<ImpactPeriod>("today");
   const [customFrom, setCustomFrom] = useState(() => isoMonthsAgo(1));
   const [customTo, setCustomTo] = useState(() => todayISO());
   const [hovered, setHovered] = useState<string | null>(null);
@@ -71,8 +71,8 @@ export function ImpactSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const range = useMemo(() => {
-    if (period === "yearly") return { from: isoMonthsAgo(12), to: todayISO() };
-    if (period === "5year") return { from: isoMonthsAgo(60), to: todayISO() };
+    if (period === "today") return { from: todayISO(), to: todayISO() };
+    if (period === "month") return { from: isoMonthsAgo(1), to: todayISO() };
     return { from: customFrom, to: customTo };
   }, [period, customFrom, customTo]);
 
@@ -141,23 +141,35 @@ export function ImpactSection() {
 
           <Reveal delay={0.1}>
             <div className="rounded-[28px] border border-border bg-card p-7 shadow-(--shadow-soft) md:p-9">
-              <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Report period">
-                {IMPACT_PERIODS.map((p) => (
-                  <button
-                    key={p.key}
-                    role="tab"
-                    aria-selected={period === p.key}
-                    onClick={() => setPeriod(p.key)}
-                    className={cn(
-                      "rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] transition-colors duration-200",
-                      period === p.key
-                        ? "border-primary bg-primary text-white"
-                        : "border-border text-text-muted hover:border-primary/40 hover:text-text"
-                    )}
-                  >
-                    {p.label}
-                  </button>
-                ))}
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Report period">
+                  {IMPACT_PERIODS.map((p) => (
+                    <button
+                      key={p.key}
+                      role="tab"
+                      aria-selected={period === p.key}
+                      onClick={() => setPeriod(p.key)}
+                      className={cn(
+                        "rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] transition-colors duration-200",
+                        period === p.key
+                          ? "border-primary bg-primary text-white"
+                          : "border-border text-text-muted hover:border-primary/40 hover:text-text"
+                      )}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary-light px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary"
+                  title="Figures reflect the hospital's live records"
+                >
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+                  </span>
+                  Live Record
+                </span>
               </div>
 
               {period === "custom" && (
